@@ -1,8 +1,8 @@
 {
   "type": "module",
-  "name": "frame1",
-  "version": "1.0.2",
-  "description": "Nodejs Frame Project",
+  "name": "deventblog",
+  "version": "1.0.0",
+  "description": "DeVent Blog",
   "main": "app.js",
   "scripts": {
     "test": "mocha",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DipokalLab/frame1.git"
+    "url": "git+https://github.com/DipokalLab/devent-blog.git"
   },
   "author": "dipokalhhj",
   "license": "ISC",

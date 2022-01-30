@@ -1,15 +1,14 @@
-![head](./head.png)
 
-# devent-frame
-노드 기반 템플릿 프로젝트
+# devent-blog
+데벤트 기술 블로그
 
 ## To-Do
 
-* [x] 사용자 로그인/가입
-* [x] RESTApi 설계
-* [x] 사용자 탈퇴
-* [x] 피드(게시판) CRUD
-* [x] mocha 테스트 코드 작성
+* [x] devent-frame 프로젝트 기반/로직 설계
+* [ ] 데이터베이스 설계/연동
+* [ ] 피드 작성/접근 제한
+
+
 
 ## 실행
 
@@ -23,13 +22,3 @@ npm install
 ```
 npm run start
 ```
-**테스트**
-
-```
-npm run test
-```
-
-
-## RestAPI 문서
-
-[Notion Page](https://freezing-pluto-006.notion.site/Freme-Project-RESTAPI-325fdb5302934c59b564b249138fe722)

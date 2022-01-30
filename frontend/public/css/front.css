@@ -1,7 +1,7 @@
 .navbar-blur {
-    background-color: #212529d5;
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    background-color: #ffffffd5;
+    -webkit-backdrop-filter: saturate(100%) blur(20px);
+    backdrop-filter: saturate(100%) blur(20px);
 }
 
 .btn-outline-light:hover {
