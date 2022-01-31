@@ -43,10 +43,12 @@ export async function getFeedsIdx(idx) {
 
 export async function insertFeedData(insertData) {
     try {
-        let { content, owner, date, type } = insertData;
-        let insertFeeds = "INSERT INTO feeds(feed_content, feed_owner, feed_date, feed_type) VALUES (?,?,?,?)";
+        let { title, intro, content, tags, date, owner, article, image } = insertData;
+        let insertFeeds = `INSERT INTO 
+        feeds(feed_title, feed_intro, feed_content, feed_tag, feed_date, feed_owner, feed_article, feed_image) 
+        VALUES (?,?,?,?,?,?,?,?);`;
         const data = await new Promise((resolve, reject) => {
-            conn.query(insertFeeds, [content, owner, date, type], function(err, result) {
+            conn.query(insertFeeds, [title, intro, content, tags, date, owner, article, image ], function(err, result) {
                 if (err) {
                     resolve({status:0})
                 }

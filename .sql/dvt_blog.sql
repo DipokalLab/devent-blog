@@ -23,25 +23,37 @@
 # Dump of table users
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE `users` (
+CREATE TABLE `articles` (
   `idx` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(20) DEFAULT NULL,
-  `user_pw` varchar(400) DEFAULT NULL,
-  `user_email` varchar(40) DEFAULT NULL,
-  `user_auth` int(3) unsigned DEFAULT 0,
+  `title` varchar(60) DEFAULT '''''',
+  `intro` varchar(100) DEFAULT '...',
+  `tag` varchar(50) DEFAULT '아티클',
   PRIMARY KEY (`idx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `feeds` (
   `idx` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `feed_content` varchar(1000) DEFAULT '''''',
-  `feed_owner` varchar(30) DEFAULT NULL,
-  `feed_date` varchar(50) DEFAULT NULL,
-  `feed_type` int(2) DEFAULT NULL,
+  `feed_title` varchar(30) DEFAULT '''''',
+  `feed_intro` varchar(300) DEFAULT '...',
+  `feed_content` varchar(5000) DEFAULT '......',
+  `feed_tag` varchar(800) DEFAULT '기술 블로그',
+  `feed_date` varchar(50) DEFAULT '0000.00.00.00.00.00',
+  `feed_owner` varchar(40) DEFAULT 'pkr',
+  `feed_article` int(11) DEFAULT 0,
+  `feed_image` varchar(700) DEFAULT '/img/feed.png',
   PRIMARY KEY (`idx`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `users` (
+  `idx` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(30) DEFAULT NULL,
+  `user_pw` varchar(300) DEFAULT NULL,
+  `user_email` varchar(50) DEFAULT NULL,
+  `user_auth` int(3) DEFAULT NULL,
+  PRIMARY KEY (`idx`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;

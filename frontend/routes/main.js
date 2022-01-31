@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 const router = Router();
 
 router.get('/', function(req, res) {
@@ -12,6 +13,10 @@ router.get('/auth/login', function(req, res) {
 
 router.get('/auth/signup', function(req, res) {
     res.render('user/signup')
+});
+
+router.get('/write', function(req, res) {
+    res.render('page/write')
 });
 
 export default router;

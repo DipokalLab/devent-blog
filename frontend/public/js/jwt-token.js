@@ -1,5 +1,15 @@
 // DeVent CDN | jwt-token.js
 
+try {
+    let token = getToken('user')
+    if (checkToken(token)) {
+        document.querySelector("#login_box").innerHTML = `<button class="btn btn-white font-weight-md text-danger btn-sm px-4 btn-rounded" onclick="logout()"><i class="fas fa-user-minus"></i></button>`
+        document.querySelector("#intro").innerText = '사용자로 로그인 완료'
+    }
+} catch (error) {
+    
+}
+
 function getToken(key) {
     let cookieKey = key + "="; 
     let result = "";

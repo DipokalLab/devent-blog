@@ -40,14 +40,18 @@ export async function insertFeed (req, res) {
     let token = req.headers['x-access-token'];
     var now = dayjs();
 
+    let title = sanitizeHtml(req.body.title);
+    let intro = sanitizeHtml(req.body.intro);
     let content = sanitizeHtml(req.body.content);
-    let owner = await transformTokentoUserid(token);
+    let tags = sanitizeHtml(req.body.tags);
     let date = now.format("YYYY.MM.DD.HH.mm.ss"); 
-    let type = 1;
+    let owner = await transformTokentoUserid(token);
+    let article = 0;
+    let image = '/';
 
-    let insertData = { content, owner, date, type };
+    let insert_data = { title, intro, content, tags, date, owner, article, image };
 
-    let data = await insertFeedData(insertData)
+    let data = await insertFeedData(insert_data)
 
     if (data.status == 1) {
         res.status(200).json({status:1})

@@ -4,5 +4,5 @@ export default
     "password": "testtesttest",
     "host": "localhost",
     "port": 3306,
-    "database": "f1"
+    "database": "dvt_blog"
 }
