@@ -19,4 +19,8 @@ router.get('/write', function(req, res) {
     res.render('page/write')
 });
 
+router.get('/post/:id', function(req, res) {
+    res.render('page/read')
+});
+
 export default router;

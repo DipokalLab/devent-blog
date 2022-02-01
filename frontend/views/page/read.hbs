@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+    {{> head}}
+  <body>
+    {{> navbar}}
+
+
+    <header class="bg-white py-5">
+        <div class="container px-5 pt-4 pb-2">
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center my-5">
+                        <h2 class="display-5 fw-bolder text-dark font-weight-lg mb-2" id="feed_title">블로그 작성</h2>
+                        <p class="lead text-dark-50 font-weight-md mb-4" id="feed_intro">데벤트 기술 블로그</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    
+    <section class="py-5" id="features">
+        <div class="container-fluid px-5 my-5">
+            <div class="row gx-5">
+
+                <div class="col-lg-12">
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
+
+                    <div id="feed_body">
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+ 
+
+    {{> footer}}
+
+
+
+<script>
+    loadFeed()
+    async function loadFeed() {
+        let idx = window.location.href.split('/')[4]
+        let data = await getSendFeed(idx)
+        console.log(data)
+        document.querySelector("#feed_title").innerText = data.data[0].feed_title
+        document.querySelector("#feed_intro").innerText = data.data[0].feed_intro
+        document.querySelector("#feed_body").innerText = data.data[0].feed_content
+
+    }
+</script>
+
+  </body>
+</html>
