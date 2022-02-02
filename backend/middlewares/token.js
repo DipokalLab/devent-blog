@@ -20,6 +20,27 @@ const check = (req, res, next) => {
   }
 }
 
+const checkWithCookie = async (req, res, next) => {
+  try {  
+    let token = req.cookies.user
+    if (!token) {
+      return res.status(401).redirect("/")
+    }
+  
+
+    let decoded = jwt.verify(token, jwtSecret);
+    let user_id = decoded.user_id;
+    let user_data = await loadUserinfo(user_id);
+    if (user_data.user_auth > 1) {
+      next()
+    } else {
+      res.status(401).redirect("/")
+    }
+  } catch (error) {
+    res.status(401).redirect("/")
+  }
+}
+
 const checkAdmin = async (req, res, next) => {
   try {  
     let token = req.headers['x-access-token'];
@@ -44,4 +65,4 @@ const checkAdmin = async (req, res, next) => {
 }
 
 
-export { check, checkAdmin };
+export { check, checkWithCookie, checkAdmin };

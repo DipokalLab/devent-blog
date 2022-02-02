@@ -1,6 +1,8 @@
 import { Router } from 'express';
+import { checkWithCookie } from '../../backend/middlewares/token.js'
 
 const router = Router();
+
 
 router.get('/', function(req, res) {
     res.render('index')
@@ -15,7 +17,7 @@ router.get('/auth/signup', function(req, res) {
     res.render('user/signup')
 });
 
-router.get('/write', function(req, res) {
+router.get('/write', checkWithCookie, function(req, res) {
     res.render('page/write')
 });
 
