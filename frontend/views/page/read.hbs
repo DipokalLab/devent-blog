@@ -11,7 +11,9 @@
                 <div class="col-lg-6">
                     <div class="text-center my-5">
                         <h2 class="display-5 fw-bolder text-dark font-weight-lg mb-2" id="feed_title">블로그 작성</h2>
-                        <p class="lead text-dark-50 font-weight-md mb-4" id="feed_intro">데벤트 기술 블로그</p>
+                        <p class="text-dark-50 font-size-sm font-weight-sm"><b id="feed_date"></b> author <b id="feed_owner"></b></p>
+
+                        <button type="button" class="btn btn-dark" id="settingButton" data-bs-toggle="modal" data-bs-target="#exampleModal">설정 </button>
 
                     </div>
                 </div>
@@ -22,12 +24,16 @@
 
     
     <section class="py-5" id="features">
+
         <div class="container px-5 my-5">
             <div class="row gx-5">
 
                 <div class="col-lg-8 mx-auto">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
 
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
+                    <div class="alert alert-light div-rounded p-5 mb-5">
+                        <b class="text-dark-50 font-size-md font-weight-sm" id="feed_intro">데벤트 기술 블로그</b>
+                    </div>
                     <div id="feed_body" class="feed-body">
 
                     </div>
@@ -40,7 +46,25 @@
     </section>
 
 
- 
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">설정</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <button class="btn btn-danger" onclick="deleteFeed()">삭제</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     {{> footer}}
 
@@ -48,14 +72,67 @@
 
 <script>
     loadFeed()
-    async function loadFeed() {
-        let idx = window.location.href.split('/')[4]
-        let data = await getSendFeed(idx)
-        console.log(data)
-        document.querySelector("#feed_title").innerText = data.data[0].feed_title
-        document.querySelector("#feed_intro").innerText = data.data[0].feed_intro
-        document.querySelector("#feed_body").innerHTML = await parserMarkdown(data.data[0].feed_content)
+    
 
+    try {
+        let token = getToken('user')
+        if (!checkToken(token)) {
+            document.querySelector("#settingButton").classList.add("div-hide")
+        }
+    } catch (error) {
+        document.querySelector("#settingButton").classList.add("div-hide")
+
+    }
+
+    async function loadFeed() {
+        try {
+            let idx = window.location.href.split('/')[4]
+            let data = await getSendFeed(idx)
+            document.querySelector("#feed_title").innerText = data.data[0].feed_title
+            document.querySelector("#feed_intro").innerText = data.data[0].feed_intro
+            document.querySelector("#feed_date").innerText = await controlFeedDate(data.data[0].feed_date)
+            document.querySelector("#feed_owner").innerText = data.data[0].feed_owner
+
+            document.querySelector("#feed_body").innerHTML = await parserMarkdown(data.data[0].feed_content)
+        } catch {
+            Swal.fire({
+                icon: 'question',
+                title: '게시글이 존재하지 않습니다.',
+                text: '곧 메인화면으로 리다이렉션 됩니다',
+                showConfirmButton: false,
+                timer: 800
+            })
+
+            setTimeout(function() {
+                location.href = '/'
+            }, 900)
+        }
+    }
+
+    async function deleteFeed() {
+        let idx = window.location.href.split('/')[4]
+        let data = await deleteSendFeed(idx)
+        if (data.status == 1) {
+            Swal.fire({
+                icon: 'success',
+                title: '정상적으로 삭제되었습니다',
+                text: '곧 메인화면으로 리다이렉션 됩니다',
+                showConfirmButton: false,
+                timer: 1500
+            })
+
+            setTimeout(function() {
+                location.href = '/'
+            }, 1700)
+        } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: '삭제 실패',
+                    text: '게시글 삭제에 실패했습니다',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+        }
     }
 </script>
 

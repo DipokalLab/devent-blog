@@ -99,3 +99,9 @@ async function updateFeed(idx, content) {
     
     console.log(data)
 }
+
+async function controlFeedDate(date) {
+    let result = date.split('.').slice(0,3).join('. ')
+    
+    return result
+}
