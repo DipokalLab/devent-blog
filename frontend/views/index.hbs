@@ -30,9 +30,10 @@
             <div class="row gx-5">
                 <div class="col-lg-3">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
-                    <h2 class="h4 fw-bolder">추천 태그</h2>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    <h2 class="h4 fw-bolder">추천 아티클</h2>
+                    <div class="d-grid gap-2 d-md-block" id="articles">
 
+                    </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
@@ -42,10 +43,6 @@
 
                     </div>
 
-
-                    <pre id="logs" style="white-space: pre-wrap;">
-
-                    </pre>
                 </div>
                 <div class="col-lg-3">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
@@ -67,6 +64,10 @@
     <script>
         // Test Ground
 
+
+
+
+
         try {
             let token = getToken('user')
             if (checkToken(token)) {
@@ -77,6 +78,7 @@
         }
         //getFeed(1)
         loadFeeds() 
+        loadArticles()
 
         let tag_title = ['세상을', '기술을', '내일을', '우리를', '오늘을', '생각을', '마음을', '지구를']
         let now_title = 0
@@ -109,6 +111,19 @@
                     </div>
                     </div>`)
             })
+        }
+
+        async function loadArticles() {
+            let data = await getArticles(0)
+            console.log(data)
+            let body = document.querySelector("#articles");
+
+            data.data.forEach(function(item) {
+                body.insertAdjacentHTML('beforeend', `
+<button class="btn btn-light btn-sm mt-1" onclick="location.href='/articles/${item.idx}'" type="button">${item.title}</button>
+`)
+            })
+            
         }
     </script>
 

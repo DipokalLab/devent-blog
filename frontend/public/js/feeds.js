@@ -105,3 +105,22 @@ async function controlFeedDate(date) {
     
     return result
 }
+
+
+async function getArticle(idx) {
+    let response = await fetch("/api/articles/"+idx, {
+        method: "GET"
+    });
+
+    let data = response.json();
+    return data;
+}
+
+async function getArticles(start) {
+    let response = await fetch(`/api/articles?start=${start}`, {
+        method: "GET"
+    });
+
+    let data = response.json();
+    return data;
+}

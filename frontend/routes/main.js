@@ -25,4 +25,8 @@ router.get('/post/:id', function(req, res) {
     res.render('page/read')
 });
 
+router.get('/articles/:id', function(req, res) {
+    res.render('page/articles')
+});
+
 export default router;

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+    {{> head}}
+  <body>
+    {{> navbar}}
+
+
+    <header class="bg-white py-5">
+        <div class="container px-5 pt-4 pb-2">
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center my-5">
+                        <h2 class="display-5 fw-bolder text-dark font-weight-lg mb-2">아티클 <i class="fas fa-caret-right"></i> <b id="article_title"></b></h2>
+                        <p class="text-dark-50 font-size-sm font-weight-sm"><b id="article_intro"></b> author</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    
+    <section class="py-5" id="features">
+
+        <div class="container px-5 my-5">
+            <div class="row gx-5">
+
+                <div class="col-lg-8 mx-auto">
+
+                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
+                    <div class="alert alert-light div-rounded p-5 mb-5">
+                        <b class="text-dark-50 font-size-md font-weight-sm" id="feed_intro">아티클 페이지</b>
+                    </div>
+                    <div id="feed_body" class="feed-body">
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    {{> footer}}
+
+
+
+<script>
+    loadArticle()
+    
+
+
+    async function loadArticle() {
+        try {
+            let idx = window.location.href.split('/')[4]
+            let data = await getArticle(idx)
+            console.log(data)
+            document.querySelector("#article_title").innerText = data.data[0].title
+            document.querySelector("#article_intro").innerText = data.data[0].intro
+
+        } catch {
+            Swal.fire({
+                icon: 'question',
+                title: '아티클이 존재하지 않습니다.',
+                text: '곧 메인화면으로 리다이렉션 됩니다',
+                showConfirmButton: false,
+                timer: 800
+            })
+
+            setTimeout(function() {
+                location.href = '/'
+            }, 900)
+        }
+    }
+
+</script>
+
+  </body>
+</html>
