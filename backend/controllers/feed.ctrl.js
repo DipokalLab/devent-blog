@@ -1,5 +1,6 @@
 import { getFeedsRange, getFeedsIdx, insertFeedData, deleteFeedData, updateFeedData } from '../models/feeds.model.js';
 import { transformTokentoUserid } from '../services/users.serv.js'
+
 import sanitizeHtml from 'sanitize-html';
 import dayjs from 'dayjs'
 
@@ -8,6 +9,7 @@ import dayjs from 'dayjs'
 
 export async function getFeed (req, res) {
     let idx = req.params.idx;
+
     let data = await getFeedsIdx(idx)
 
     if (Array.isArray(data) && data.length === 0) {
@@ -47,7 +49,7 @@ export async function insertFeed (req, res) {
     let date = now.format("YYYY.MM.DD.HH.mm.ss"); 
     let owner = await transformTokentoUserid(token);
     let article = 0;
-    let image = '/';
+    let image = sanitizeHtml(req.body.image);
 
     let insert_data = { title, intro, content, tags, date, owner, article, image };
 

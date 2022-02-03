@@ -33,7 +33,7 @@ CREATE TABLE `articles` (
 
 CREATE TABLE `feeds` (
   `idx` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `feed_title` varchar(30) DEFAULT '''''',
+  `feed_title` varchar(60) DEFAULT '''''',
   `feed_intro` varchar(300) DEFAULT '...',
   `feed_content` varchar(5000) DEFAULT '......',
   `feed_tag` varchar(800) DEFAULT '기술 블로그',

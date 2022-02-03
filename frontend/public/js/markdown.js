@@ -4,6 +4,9 @@ async function parserMarkdown(data) {
         .replace(/[\#]{1}(.+)/g, '<h1>$1</h1>')
         .replace(/\!\[([^\]]+)\]\(([^\)]+)\)/g, '<img src="$2" class="img-rounded w-100 img-fluid" alt="$1" />')
         .replace(/\n/g, '<br>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
 
     return result
 }
+
+

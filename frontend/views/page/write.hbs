@@ -43,6 +43,11 @@
                         <textarea onkeydown="markdownFeed()" onchange="markdownFeed()" class="form-control form-textarea color-gray-100" id="form_content" rows="10"></textarea>
                     </div>
 
+                    <div class="mb-3">
+                        <b>헤더 이미지</b>
+                        <textarea class="form-control form-textarea color-gray-100" id="form_image" rows="1">/img/sample.jpg</textarea>
+                    </div>
+
                     <div class="d-grid gap-2">
                         <button class="btn color-blue-100 text-primary" onclick="appendFeed()">피드 작성</button>
                     </div>
@@ -76,8 +81,10 @@
         let title = document.querySelector("#form_title").value;
         let intro = document.querySelector("#form_intro").value;
         let content = document.querySelector("#form_content").value;
+        let image = document.querySelector("#form_image").value;
+
         let tags = 'aaa'
-        let data = {title, intro, content, tags}
+        let data = {title, intro, content, tags, image}
         let result = await insertSendFeed(data)
 
         if (result.status == 1) {
