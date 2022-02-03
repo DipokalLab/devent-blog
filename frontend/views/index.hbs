@@ -104,7 +104,10 @@
 
             data.data.forEach(function(item) {
                 body.insertAdjacentHTML('beforeend', `<div class="card mb-5 mt-3" style="width: 100%;" onclick="location.href='/post/${item.idx}'">
-                    <img class="card-img-top" src="${item.feed_image}" alt="Card image cap">
+                    <div class="card-img">
+                        <img class="card-img-top" src="${item.feed_image}" alt="Card image cap">
+
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">${item.feed_title}</h5>
                         <p class="card-text">${item.feed_intro}</p>
