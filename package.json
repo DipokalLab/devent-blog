@@ -25,6 +25,7 @@
     "dayjs": "^1.10.7",
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
+    "helmet": "^5.0.2",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
     "sanitize-html": "^2.6.1"
