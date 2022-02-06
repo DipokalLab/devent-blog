@@ -48,6 +48,15 @@
                         <textarea class="form-control form-textarea color-gray-100" id="form_image" rows="1">/img/sample.jpg</textarea>
                     </div>
 
+                    <div class="mb-3">
+                        <b>아티클</b>
+                        <select class="form-select color-gray-100" id="articles" aria-label="Default select example">
+                            <option value="-1" selected>아티클 선택</option>
+                        </select>                    
+                    </div>
+
+
+
                     <div class="d-grid gap-2">
                         <button class="btn color-blue-100 text-primary" onclick="appendFeed()">피드 작성</button>
                     </div>
@@ -77,14 +86,31 @@
 
 
 <script>
+    loadArticles() 
+
+
+
     async function appendFeed() {
         let title = document.querySelector("#form_title").value;
         let intro = document.querySelector("#form_intro").value;
         let content = document.querySelector("#form_content").value;
         let image = document.querySelector("#form_image").value;
+        let select_body = document.querySelector("#articles")
+        let article = select_body.options[select_body.selectedIndex].value;
 
         let tags = 'aaa'
-        let data = {title, intro, content, tags, image}
+        if (title == '' || intro == '' || content == '' || image == '' || article == '-1') {
+            Swal.fire({
+                icon: 'error',
+                title: '빈 공간이 존재합니다',
+                text: '입력 칸을 확인해주세요',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            return 0
+            
+        } 
+        let data = {title, intro, content, tags, image, article}
         let result = await insertSendFeed(data)
 
         if (result.status == 1) {
@@ -108,7 +134,18 @@
 
     }
 
+        async function loadArticles() {
+            let data = await getArticles(0)
+            console.log(data)
+            let body = document.querySelector("#articles");
 
+            data.data.forEach(function(item) {
+                body.insertAdjacentHTML('beforeend', `
+                                            <option value="${item.idx}">${item.title}</option>
+`)
+            })
+            
+        }
 
 </script>
 

@@ -48,7 +48,7 @@ export async function insertFeed (req, res) {
     let tags = sanitizeHtml(req.body.tags);
     let date = now.format("YYYY.MM.DD.HH.mm.ss"); 
     let owner = await transformTokentoUserid(token);
-    let article = 0;
+    let article = req.body.article;
     let image = sanitizeHtml(req.body.image);
 
     let insert_data = { title, intro, content, tags, date, owner, article, image };

@@ -1,4 +1,4 @@
-import { getArticleFromIdx, getArticlesRange } from '../models/articles.model.js'
+import { getArticleFromIdx, getArticlesRange, insertArticleData } from '../models/articles.model.js'
 
 
 
@@ -32,3 +32,19 @@ export async function getArticles (req, res) {
 
     }
 }
+
+export async function insertArticle (req, res) {
+    let title = req.body.title;
+    let intro = req.body.intro;
+    let tag = req.body.tag;
+
+    let data = await insertArticleData({ title, intro, tag })
+
+    if (data.status == 1) {
+        res.status(200).json({status:1})
+    } else {
+        res.status(404).json({status:0})
+
+    }
+}
+

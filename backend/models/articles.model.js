@@ -41,3 +41,22 @@ export async function getArticleFromIdx(idx) {
     }
 }
 
+export async function insertArticleData({title, intro, tag}) {
+    try {
+        let insertArticle = "INSERT INTO articles (title, intro, tag) VALUES (?,?,?)";
+        const data = await new Promise((resolve, reject) => {
+            conn.query(insertArticle, [title, intro, tag], function(err, result) {
+                if (err) {
+                    resolve({status:0})
+                }
+                resolve({status:0})
+            });
+        })
+
+        return data
+
+    } catch (err) {
+        console.log(err)
+        throw Error(err)
+    }
+}

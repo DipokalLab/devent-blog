@@ -35,7 +35,7 @@ async function getFeedRange(start) {
 }
 
 
-async function insertSendFeed({title, intro, content, tags, image}) {
+async function insertSendFeed({title, intro, content, tags, image, article}) {
 
     let response = await fetch("/api/feeds", {
         method: "POST",
@@ -44,7 +44,7 @@ async function insertSendFeed({title, intro, content, tags, image}) {
             "x-access-token": getToken('user')
 
         },
-        body: `title=${title}&intro=${intro}&content=${content}&tags=${tags}&image=${image}`
+        body: `title=${title}&intro=${intro}&content=${content}&tags=${tags}&image=${image}&article=${article}`
 
     });
 
