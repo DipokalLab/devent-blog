@@ -21,12 +21,11 @@ export async function getFeed (req, res) {
 
 export async function getFeedRange (req, res) {
 
-    let getRange = 10;
-    let queryStart = req.query.start;
+    let get_range = 10;
+    let query_start = Number(req.query.start);
 
-    let start = Number.isInteger(queryStart) == true ? queryStart : 0
-    let end = start+getRange;
-
+    let start = Number.isInteger(query_start) == true ? query_start : 0
+    let end = start+get_range;
 
     let data = await getFeedsRange({ start, end })
 
@@ -88,9 +87,9 @@ export async function updateFeed (req, res) {
     let feed_update_content = req.body.content;
     let owner = await transformTokentoUserid(token);
 
-    let updateData = { feed_update_idx, feed_update_content, owner };
+    let update_data = { feed_update_idx, feed_update_content, owner };
 
-    let data = await updateFeedData(updateData)
+    let data = await updateFeedData(update_data)
 
     if (data.status == 1) {
         res.status(200).json({status:1})
