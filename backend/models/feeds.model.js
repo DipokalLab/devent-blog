@@ -114,3 +114,22 @@ export async function updateFeedData(updateData) {
         throw Error(err)
     }
 }
+
+export async function getFeedsInsideArticle(article_idx) {
+    try {
+        let selectFeedsFromArticle = "SELECT * FROM feeds WHERE feed_article = ?";
+        const data = await new Promise((resolve, reject) => {
+            conn.query(selectFeedsFromArticle, [article_idx], function(err, result) {
+                if (err) {
+                    resolve({status:0})
+                }
+                resolve({status:1, result:result})
+            });
+        })
+
+        return data
+    } catch (err) {
+        console.log(err)
+        throw Error(err)
+    }
+}

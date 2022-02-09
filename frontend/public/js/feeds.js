@@ -124,3 +124,13 @@ async function getArticles(start) {
     let data = response.json();
     return data;
 }
+
+async function getFeedsFromArticleIdx(article_idx) {
+    let response = await fetch(`/api/feeds/article/${article_idx}`, {
+        method: "GET"
+    });
+
+    let data = response.json();
+    return data;
+}
+

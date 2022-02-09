@@ -1,4 +1,4 @@
-import { getFeedsRange, getFeedsIdx, insertFeedData, deleteFeedData, updateFeedData } from '../models/feeds.model.js';
+import { getFeedsRange, getFeedsIdx, insertFeedData, deleteFeedData, updateFeedData, getFeedsInsideArticle } from '../models/feeds.model.js';
 import { transformTokentoUserid } from '../services/users.serv.js'
 
 import sanitizeHtml from 'sanitize-html';
@@ -95,5 +95,17 @@ export async function updateFeed (req, res) {
         res.status(200).json({status:1})
     } else {
         res.status(401).json({status:0})
+    }
+}
+
+export async function getFeedsFromArticles (req, res) {
+    let article_idx = req.params.idx;
+
+    let data = await getFeedsInsideArticle(article_idx)
+
+    if (data.status == 1) {
+        res.status(200).json({data:data.result})
+    } else {
+        res.status(404).json({data:'', msg:'Not Found'})
     }
 }
