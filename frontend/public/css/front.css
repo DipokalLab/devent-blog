@@ -1,6 +1,8 @@
 :root {
-    --borderRadius: 22px;
+    --borderRadius: 12px;
     --btnBorderRadius: 12px;
+    --formBackgroundColor: #e8ecf4;
+
 }
 
 h2 {
@@ -57,6 +59,17 @@ h2 {
 
 .form-textarea{
     border: none !important;
+}
+
+.form-control{
+    border: none !important;
+    border-radius: var(--borderRadius);
+    background-color: var(--formBackgroundColor);
+}
+
+.form-control:focus{
+    border: none !important;
+    background-color: var(--formBackgroundColor);
 }
 
 .card {

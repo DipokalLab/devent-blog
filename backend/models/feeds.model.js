@@ -4,7 +4,16 @@ export async function getFeedsRange(range) {
     try {
         let { start, end } = range;
 
-        let selectFeeds = "SELECT * FROM feeds WHERE idx BETWEEN ? AND ?";
+        let selectFeeds = `SELECT 
+        idx, 
+        feed_title,
+        feed_intro,
+        feed_tag,
+        feed_date,
+        feed_owner,
+        feed_article,
+        feed_image
+        FROM feeds WHERE idx BETWEEN ? AND ? ORDER BY idx DESC`;
         const data = await new Promise((resolve, reject) => {
             conn.query(selectFeeds, [start, end], function(err, result) {
                 if (err) {
