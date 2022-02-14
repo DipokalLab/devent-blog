@@ -1,4 +1,4 @@
-import { getFeedsRange, getFeedsIdx, insertFeedData, deleteFeedData, updateFeedData, getFeedsInsideArticle } from '../models/feeds.model.js';
+import { getFeedsRange, getFeedData, insertFeedData, deleteFeedData, updateFeedData, getFeedsInsideArticle } from '../models/feeds.model.js';
 import { transformTokentoUserid } from '../services/users.serv.js'
 
 import sanitizeHtml from 'sanitize-html';
@@ -10,7 +10,7 @@ import dayjs from 'dayjs'
 export async function getFeed (req, res) {
     let idx = req.params.idx;
 
-    let data = await getFeedsIdx(idx)
+    let data = await getFeedData(idx)
 
     if (Array.isArray(data) && data.length === 0) {
         res.status(404).json({data:'', msg:'Not Found'})

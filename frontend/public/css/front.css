@@ -1,7 +1,7 @@
 :root {
     --borderRadius: 12px;
     --btnBorderRadius: 12px;
-    --formBackgroundColor: #e8ecf4;
+    --formBackgroundColor: #eef1f7;
 
 }
 
@@ -10,9 +10,29 @@ h2 {
 }
 
 .navbar-blur {
+    transition: backdrop-filter 0.3s;
+    transition: background-color 0.3s;
+    -webkit-backdrop-filter: saturate(100%) blur(0px);
+    backdrop-filter: saturate(100%) blur(0px);
+}
+
+.bg-header-blur{
+    background-color: #ffffffd5;
+
+    -webkit-backdrop-filter: saturate(100%) blur(8px);
+    backdrop-filter: saturate(100%) blur(8px);
+}
+
+.blur-active {
     background-color: #ffffffd5;
     -webkit-backdrop-filter: saturate(100%) blur(20px);
     backdrop-filter: saturate(100%) blur(20px);
+}
+
+.text-invert {
+    color: rgb(255, 255, 255) !important;
+    mix-blend-mode: difference !important;
+
 }
 
 .btn-outline-light:hover {
@@ -29,6 +49,11 @@ h2 {
 
 .font-title {
     font-family: 'Noto Sans KR', sans-serif;
+}
+
+.font-weight-mx {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 900 !important;
 }
 
 .font-weight-lg {
@@ -82,7 +107,15 @@ h2 {
     box-shadow: 0px 0px 40px rgba(40, 58, 107, 0.116);
     --webkit-transform:scale(1.02);
     transform:scale(1.02);
+    cursor:pointer;
 }
+
+.card:hover > .card-body > .card-title, 
+.card:hover > .card-body > .card-text {
+    text-decoration: underline;
+    cursor:pointer;
+}
+
 
 .card-body {
     padding-right: 0px !important;

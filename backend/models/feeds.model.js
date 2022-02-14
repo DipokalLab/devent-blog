@@ -30,7 +30,7 @@ export async function getFeedsRange(range) {
     }
 }
 
-export async function getFeedsIdx(idx) {
+export async function getFeedData(idx) {
     try {
         let selectFeed = "SELECT * FROM feeds WHERE idx = ?";
         const data = await new Promise((resolve, reject) => {

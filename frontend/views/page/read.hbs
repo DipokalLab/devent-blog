@@ -2,16 +2,16 @@
 <html lang="ko">
     {{> head}}
   <body>
-    {{> navbar}}
+    {{> navbar text-style-color="text-invert "}}
 
 
-    <header class="bg-white py-5">
-        <div class="container px-5 pt-4 pb-2">
+    <header class="bg-white bg-header-blur py-5" id="header">
+        <div class="container px-5 pt-4 pb-2" >
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
                     <div class="text-center my-5">
-                        <h2 class="display-5 fw-bolder text-dark font-weight-lg mb-2" id="feed_title">블로그 작성</h2>
-                        <p class="text-dark-50 font-size-sm font-weight-sm"><b id="feed_date"></b> author <b id="feed_owner"></b></p>
+                        <h2 class="display-5 fw-bolder font-weight-lg mb-2 text-invert" id="feed_title">블로그 작성</h2>
+                        <p class="text-invert font-size-sm font-weight-sm"><b id="feed_date"></b> ㆍ author <b id="feed_owner"></b></p>
 
                         <button type="button" class="btn btn-dark" id="settingButton" data-bs-toggle="modal" data-bs-target="#exampleModal">설정 </button>
 
@@ -113,6 +113,12 @@
             document.querySelector("#feed_date").innerText = await controlFeedDate(data.data[0].feed_date)
             document.querySelector("#feed_owner").innerText = data.data[0].feed_owner
             document.querySelector("#feed_body").innerHTML = await parserMarkdown(data.data[0].feed_content)
+            document.getElementById("header").style.background = `url(${data.data[0].feed_image})`
+            document.getElementById("header").style.backgroundRepeat = 'no-repeat'
+            document.getElementById("header").style.backgroundPosition = 'center center'
+            document.getElementById("header").style.backgroundSize = 'cover'
+
+
             return data
         } catch {
             Swal.fire({
