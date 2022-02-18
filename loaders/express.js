@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import { engine } from 'express-handlebars';
 import * as helmet from "helmet";
+import cors from 'cors';
 
 import apiRouter from '../backend/api.js';
 import mainRouter from '../frontend/routes/main.js';
@@ -24,6 +25,7 @@ export async function init (app) {
     app.use(helmet.originAgentCluster());
     app.use(helmet.referrerPolicy());
     app.use(helmet.xssFilter());
+
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended : true}));
     app.use(cookieParser());

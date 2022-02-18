@@ -52,11 +52,18 @@
 
                     <div class="mb-3">
                         <b>아티클</b>
-                        <select class="form-select color-gray-100" id="articles" aria-label="Default select example">
+                        <select class="form-control form-select color-gray-100" id="articles" aria-label="Default select example">
                             <option value="-1" selected>아티클 선택</option>
                         </select>                    
                     </div>
 
+                    <div class="mb-3">
+                        <b>이미지 압로드</b>
+                        <input class="form-control" type="file" id="form_file">
+                        <div id="image">
+
+                        </div>
+                    </div>
 
 
                     <div class="d-grid gap-2">
@@ -89,6 +96,43 @@
 
 <script>
     loadArticles() 
+
+    form_file.onchange = function(evt) {
+        let file = document.querySelector('#form_file').files[0]
+        let formData = new FormData()
+        let token = getToken('user')
+        formData.append('image', file)
+
+        console.log(formData)
+
+        fetch("http://localhost:9001/api/images", { 
+            method: "POST",
+            headers: {
+                "x-access-token" : `${token}`
+            },
+            body: formData
+        }).then(function(res) {
+            if (res.ok) {
+                return res.json()
+            }
+        }).then(function(result) {
+            if (result.status == 1) {
+
+                document.querySelector("#image").insertAdjacentHTML('beforeend', 
+                `http://localhost:9001/file/${result.filename} <br>`)
+
+                setTimeout(() => {
+                    swal.fire({
+                        icon: 'success',
+                        title: '게시 완료',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }, 900);
+    
+            }
+        });
+    };
 
 
 
