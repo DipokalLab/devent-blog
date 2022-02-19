@@ -54,11 +54,13 @@
                         <b>아티클</b>
                         <select class="form-control form-select color-gray-100" id="articles" aria-label="Default select example">
                             <option value="-1" selected>아티클 선택</option>
+                            <option value="-2" >아티클 생성</option>
+
                         </select>                    
                     </div>
 
                     <div class="mb-3">
-                        <b>이미지 압로드</b>
+                        <b>이미지 업로드</b>
                         <input class="form-control" type="file" id="form_file">
                         <div id="image">
 
@@ -70,10 +72,6 @@
                         <button class="btn color-blue-100 text-primary" onclick="appendFeed()">피드 작성</button>
                     </div>
 
-
-                    <pre id="logs" style="white-space: pre-wrap;">
-
-                    </pre>
                 </div>
 
                 <div class="col-lg-6">
@@ -88,6 +86,36 @@
     </section>
 
 
+    <div class="modal fade" id="create_article" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">아티클 생성</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+                    <div class="mb-3">
+                        <b>아티클 제목</b>
+                        <textarea class="form-control form-textarea color-gray-100" id="form_article_title" rows="1"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <b>아티클 소개</b>
+                        <textarea class="form-control form-textarea color-gray-100" id="form_article_intro" rows="1"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <b>태그</b>
+                        <textarea class="form-control form-textarea color-gray-100" id="form_article_tag" rows="1"></textarea>
+                    </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            <button type="button" class="btn btn-primary" onclick="createArticle()">생성</button>
+        </div>
+        </div>
+    </div>
+    </div>
  
 
     {{> footer}}
@@ -103,7 +131,6 @@
         let token = getToken('user')
         formData.append('image', file)
 
-        console.log(formData)
 
         fetch("http://localhost:9001/api/images", { 
             method: "POST",
@@ -133,7 +160,52 @@
             }
         });
     };
+    
 
+    articles.onchange = function(evt) {
+        let select_body = document.querySelector("#articles")
+        let article = select_body.options[select_body.selectedIndex].value;
+        let modal = new bootstrap.Modal(document.getElementById('create_article'), {
+            keyboard: false
+        })
+
+        if (article == -2) {
+            modal.show()
+        }
+    };
+    
+
+    async function createArticle() {
+        let title = document.querySelector("#form_article_title").value;
+        let intro = document.querySelector("#form_article_intro").value;
+        let tag = document.querySelector("#form_article_tag").value;
+        let token = getToken('user')
+
+        fetch("/api/articles", { 
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "x-access-token" : `${token}`
+            },
+            body: `title=${title}&intro=${intro}&tag=${tag}`
+        }).then(function(res) {
+            if (res.ok) {
+                return res.json()
+            }
+        }).then(function(result) {
+            if (result.status == 1) {
+                setTimeout(() => {
+                    swal.fire({
+                        icon: 'success',
+                        title: '생성 완료',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }, 200);
+    
+            }
+        });
+    }
 
 
     async function appendFeed() {
@@ -180,18 +252,14 @@
 
     }
 
-        async function loadArticles() {
-            let data = await getArticles(0)
-            console.log(data)
-            let body = document.querySelector("#articles");
+    async function loadArticles() {
+        let data = await getArticles(0)
+        let body = document.querySelector("#articles");
 
-            data.data.forEach(function(item) {
-                body.insertAdjacentHTML('beforeend', `
-                                            <option value="${item.idx}">${item.title}</option>
-`)
-            })
-            
-        }
+        data.data.forEach(function(item) {
+            body.insertAdjacentHTML('beforeend', `<option value="${item.idx}">${item.title}</option>`)
+        })
+    }
 
 </script>
 

@@ -49,7 +49,7 @@ export async function insertArticleData({title, intro, tag}) {
                 if (err) {
                     resolve({status:0})
                 }
-                resolve({status:0})
+                resolve({status:1})
             });
         })
 
