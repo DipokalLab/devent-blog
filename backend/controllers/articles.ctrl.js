@@ -38,8 +38,6 @@ export async function insertArticle (req, res) {
     let intro = req.body.intro;
     let tag = req.body.tag;
 
-    console.log(title)
-
     let data = await insertArticleData({ title, intro, tag })
 
     if (data.status == 1) {

@@ -53,8 +53,7 @@
                     <div class="mb-3">
                         <b>아티클</b>
                         <select class="form-control form-select color-gray-100" id="articles" aria-label="Default select example">
-                            <option value="-1" selected>아티클 선택</option>
-                            <option value="-2" >아티클 생성</option>
+
 
                         </select>                    
                     </div>
@@ -181,19 +180,20 @@
         let tag = document.querySelector("#form_article_tag").value;
         let token = getToken('user')
 
-        fetch("/api/articles", { 
+        await fetch("/api/articles", { 
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 "x-access-token" : `${token}`
             },
             body: `title=${title}&intro=${intro}&tag=${tag}`
-        }).then(function(res) {
+        }).then(async function(res) {
             if (res.ok) {
                 return res.json()
             }
-        }).then(function(result) {
+        }).then(async function(result) {
             if (result.status == 1) {
+                await loadArticles()
                 setTimeout(() => {
                     swal.fire({
                         icon: 'success',
@@ -255,9 +255,29 @@
     async function loadArticles() {
         let data = await getArticles(0)
         let body = document.querySelector("#articles");
+        body.innerHTML = ''
+
+        await loadArticlesPreset()
+
 
         data.data.forEach(function(item) {
             body.insertAdjacentHTML('beforeend', `<option value="${item.idx}">${item.title}</option>`)
+        })
+    }
+
+    async function loadArticlesPreset() {
+        let body = document.querySelector("#articles");
+
+        let data_preset = [
+            {
+                idx: "-1", isselected: "true", title: "아티클 선택"
+            },
+            {
+                idx: "-2", isselected: "false", title: "아티클 생성"
+            }
+        ]
+        data_preset.forEach(function(item) {
+            body.insertAdjacentHTML('beforeend', `<option value="${item.idx}" ${item.isselected == "true" ? "selected" : ""}>${item.title}</option>`)
         })
     }
 
