@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light navbar-blur fixed-top" id="nav">
-    <div class="container-fluid px-0">
+<nav class="navbar navbar-expand-lg navbar-light navbar-blur-base fixed-top" id="nav">
+    <div class="container-fluid px-4 py-2">
         <a class="navbar-brand font-weight-lg {{text-style-color}}" href="/">Blog</a>
         <button id="navbar_toggle_button" class="navbar-toggler" type="button" onclick="toggleNavbarIcon()" data-bs-toggle="collapse" data-bs-target="#navbar_toggler" aria-controls="navbar_toggler" aria-expanded="false" aria-label="Toggle navigation">
             <i class="{{text-style-color}} fas fa-bars icon-navbar-menu"></i>
@@ -8,8 +8,8 @@
         <div class="collapse navbar-collapse" id="navbar_toggler">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mr-2">
             </ul>
-            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center" id="login_box">
-                <button id="login_handle_btn" class="btn font-weight-md {{text-style-color}} btn-sm px-3 me-sm-3 btn-rounded" onclick="location.href = '/auth/login'"><i class="fas fa-sign-in-alt"></i></button>
+            <div class="justify-content-sm-center" id="login_box">
+                <button id="login_handle_btn" class="btn {{text-style-color}} btn-sm" onclick="location.href = '/auth/login'"><i class="fas fa-sign-in-alt"></i></button>
             </div>
         </div>
     </div>

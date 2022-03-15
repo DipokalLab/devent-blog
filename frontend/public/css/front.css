@@ -9,7 +9,7 @@ h2 {
     word-break: break-all;
 }
 
-.navbar-blur {
+.navbar-blur-base {
     transition: backdrop-filter 0.3s;
     transition: background-color 0.3s;
     -webkit-backdrop-filter: saturate(100%) blur(0px);
@@ -23,7 +23,7 @@ h2 {
     backdrop-filter: saturate(100%) blur(8px);
 }
 
-.blur-active {
+.blur-active-base {
     background-color: #ffffffd5;
     -webkit-backdrop-filter: saturate(100%) blur(20px);
     backdrop-filter: saturate(100%) blur(20px);
@@ -45,6 +45,10 @@ h2 {
 
 .btn {
     border-radius: var(--btnBorderRadius) !important;
+}
+
+.btn-sm {
+    padding: 5px !important;
 }
 
 .font-title {
@@ -92,6 +96,7 @@ h2 {
 
 .card {
     box-shadow: none !important;
+    border: none !important;
     width: 100%;
     height: 100%;
 }
@@ -167,29 +172,7 @@ h2 {
     margin: -10px 0px 0px -180px;
 }
 
-.navbar-toggler {
-    outline: none;
-    border-color: transparent !important;
-    box-shadow: transparent;
-}
 
-.navbar-toggler > .icon-close {
-    display: none;
-}
-
-
-.navbar-toggler:focus {
-    box-shadow: none !important;
-}
-
-.navbar-toggler:focus > .icon-menu {
-    display: none;
-}
-
-
-.navbar {
-    padding: 0.55rem 1.5rem !important;
-}
 
 .feed-body {
     white-space: normal;
@@ -206,4 +189,9 @@ h2 {
 
 .div-hide {
     display: none;
+}
+
+header {
+    margin-top: 0px;
+    padding-top: 30px !important;
 }
