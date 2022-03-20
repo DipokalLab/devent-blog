@@ -36,3 +36,23 @@ npm install
 ```
 npm run start
 ```
+
+## 배포
+
+#### STEP.1 deployenv 설정
+
+```
+VIRTUAL_HOST=blog.devent.kr,LETSENCRYPT_HOST=blog.devent.kr,LETSENCRYPT_EMAIL=hhj.devent.kr,DB_USER=root,DB_PASS=testtesttest,DB_HOST=172.17.0.1,DB_PORT=33060
+```
+
+#### STEP.2 mysql 컨테이너 설정
+
+```
+docker run --name mysql-blog-container -e MYSQL_ROOT_PASSWORD=testtesttest -d -p 3307:3306 mysql:8.0.28-oracle
+```
+
+#### STEP.3 SQL 적용
+
+```
+docker exec -i mysql-blog-container sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < /Users/hhj/Documents/GitHub/.sql/dvt_blog.sql
+```

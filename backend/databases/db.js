@@ -6,6 +6,7 @@ const conn = createConnection({
   user     : data.username,
   password : data.password,
   database : data.database,
+  port     : data.port,
   multipleStatements: true 
 });
 

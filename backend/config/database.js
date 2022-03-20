@@ -6,7 +6,7 @@ if(process.env.NODE_ENV === 'prod') {
         "username": process.env.MYSQL_USERNAME,
         "password": process.env.MYSQL_PASSWORD,
         "host": process.env.MYSQL_HOSTNAME,
-        "port": process.env.MYSQL_PORT,
+        "port": Number(process.env.MYSQL_PORT),
         "database": "dvt_blog"
     }
 } else {
@@ -20,6 +20,8 @@ if(process.env.NODE_ENV === 'prod') {
         "database": "dvt_blog"
     }
 }
+
+console.log(config)
 
 
 export default config
