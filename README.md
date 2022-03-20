@@ -42,7 +42,7 @@ npm run start
 #### STEP.1 deployenv 설정
 
 ```
-VIRTUAL_HOST=blog.devent.kr,LETSENCRYPT_HOST=blog.devent.kr,LETSENCRYPT_EMAIL=hhj.devent.kr,DB_USER=root,DB_PASS=testtesttest,DB_HOST=172.17.0.1,DB_PORT=33060
+VIRTUAL_HOST=blog.devent.kr,LETSENCRYPT_HOST=blog.devent.kr,LETSENCRYPT_EMAIL=hhj@devent.kr,DB_USER=root,DB_PASS=testtesttest,DB_HOST=172.17.0.1,DB_PORT=3307
 ```
 
 #### STEP.2 mysql 컨테이너 설정
