@@ -134,3 +134,11 @@ async function getFeedsFromArticleIdx(article_idx) {
     return data;
 }
 
+async function getFeedsInformation(article_idx) {
+    let response = await fetch(`/api/feeds/info/database`, {
+        method: "GET"
+    });
+
+    let data = response.json();
+    return data;
+}

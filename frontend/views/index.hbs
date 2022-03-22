@@ -4,26 +4,19 @@
   <body>
     {{> navbar text-style-color="text-dark"}}
 
-    <header class="bg-white py-5">
-        <div class="container px-4 pt-5 pb-3">
-            <div class="row gx-5 justify-content-center">
-                <div class="col-lg-6">
-                    <div class="text-center my-5">
-                        <h2 class="display-5 fw-bolder text-dark font-weight-lg mb-2">더 나은 <b class="font-weight-lg" id="blog_tags">세상을</b> 향해.</h2>
-                        <p class="lead text-dark-50 font-weight-md mb-4" id="intro">데벤트 기술 블로그</p>
-                        <div id="loggedin_panel" class="div-hide">
-                            <div class="d-grid gap-2">
-                                <button class="btn color-blue-100 text-primary" onclick="location.href='/write'">피드 작성</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
+    <dds-header 
+        header-title="더 나은 세상을 향해"
+        header-sub-title="데벤트 기술 블로그">
+        <div id="loggedin_panel" class="div-hide">
+            <div class="d-grid gap-2">
+                <button class="btn btn-blue" onclick="location.href='/write'">피드 작성</button>
             </div>
         </div>
-    </header>
+    </dds-header>
 
 
-    
     <section class="py-3" id="features">
         <div class="container-fluid px-4 my-5">
             <div class="row gx-5">
@@ -46,7 +39,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
-                    <h2 class="h6 fw-bolder">모든 태그</h2>
+                    <h2 class="h6 fw-bolder">기타 링크</h2>
                     <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                     <a class="text-decoration-none" href="#!">
                         Call to action
@@ -76,26 +69,24 @@
         } catch (error) {
             
         }
+        patchFeed()
         loadFeeds() 
         loadArticles()
 
 
-        setInterval(() => {
-            if (tag_title.length > now_title) {
-                document.querySelector("#blog_tags").innerText = tag_title[now_title]
-                now_title += 1
-            } else {
-                now_title = 0
-                document.querySelector("#blog_tags").innerText = tag_title[now_title]
+        
 
-            }
+        async function patchFeed() {
+            let feeds_info = await getFeedsInformation()
+            console.log(feeds_info)
+            now_feed_idx = feeds_info.data[0].feed_last_idx
+            
+        }
 
-        }, 2000)
-
-
+        
 
         async function loadFeeds() {
-            console.log(now_feed_idx)
+
             let data = await getFeedRange(now_feed_idx);
             let body = document.querySelector("#feeds");
             
@@ -106,6 +97,8 @@
 
                     </div>
                     <div class="card-body">
+                        <span class="badge rounded-pill color-blue-100 text-primary mb-3">${item.feed_tag}</span>
+
                         <h5 class="card-title">${item.feed_title}</h5>
                         <p class="card-text">${item.feed_intro}</p>
                     </div>
@@ -128,7 +121,7 @@
 
             data.data.forEach(function(item) {
                 body.insertAdjacentHTML('beforeend', `
-<button class="btn btn-light btn-sm mt-1 mr-1" onclick="location.href='/articles/${item.idx}'" type="button">${item.title}</button>
+<button class="btn btn-light mt-1 mr-1" onclick="location.href='/articles/${item.idx}'" type="button">${item.title}</button>
 `)
             })
             

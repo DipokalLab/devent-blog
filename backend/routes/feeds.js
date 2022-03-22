@@ -10,7 +10,8 @@ import {
     insertFeed, 
     deleteFeed, 
     updateFeed, 
-    getFeedsFromArticles 
+    getFeedsFromArticles ,
+    getFeedsInfo
 } from '../controllers/feed.ctrl.js';
 
 
@@ -22,6 +23,7 @@ router.delete('/:idx', checkAdmin, deleteFeed);
 router.put('/:idx', checkAdmin, updateFeed);
 
 router.get('/article/:idx', getFeedsFromArticles);
+router.get('/info/database', getFeedsInfo);
 
 
 

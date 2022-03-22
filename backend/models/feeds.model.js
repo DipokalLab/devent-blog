@@ -142,3 +142,25 @@ export async function getFeedsInsideArticle(article_idx) {
         throw Error(err)
     }
 }
+
+export async function getFeedsInformation() {
+    try {
+        let selectFeedsInformation = `SELECT 
+        count(*) as feed_count,
+        MAX(idx) as feed_last_idx
+        FROM feeds`;
+        const data = await new Promise((resolve, reject) => {
+            conn.query(selectFeedsInformation, function(err, result) {
+                if (err) {
+                    resolve({status:0})
+                }
+                resolve({status:1, result:result})
+            });
+        })
+
+        return data
+    } catch (err) {
+        console.log(err)
+        throw Error(err)
+    }
+}

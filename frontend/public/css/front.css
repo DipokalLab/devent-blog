@@ -2,6 +2,7 @@
     --borderRadius: 12px;
     --btnBorderRadius: 12px;
     --formBackgroundColor: #eef1f7;
+    --textColor: #156df2;
 
 }
 
@@ -21,6 +22,7 @@ h2 {
 
     -webkit-backdrop-filter: saturate(100%) blur(8px);
     backdrop-filter: saturate(100%) blur(8px);
+    padding: 160px 100px !important;
 }
 
 .blur-active-base {
@@ -94,6 +96,10 @@ h2 {
     background-color: var(--formBackgroundColor);
 }
 
+.alert-dark {
+    border: transparent;
+}
+
 .card {
     box-shadow: none !important;
     border: none !important;
@@ -104,7 +110,7 @@ h2 {
 
 .card-title{
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 24px;
+    font-size: 32px;
     margin-bottom: 24px;
     line-height: 12px;
 }
@@ -118,7 +124,7 @@ h2 {
 
 .card:hover > .card-body > .card-title, 
 .card:hover > .card-body > .card-text {
-    text-decoration: underline;
+    color: var(--textColor);
     cursor:pointer;
 }
 
@@ -126,6 +132,7 @@ h2 {
 .card-body {
     padding-right: 0px !important;
     padding-left: 0px !important;
+    padding-top: 40px;
 }
 
 .card-img-top {
@@ -194,4 +201,8 @@ h2 {
 header {
     margin-top: 0px;
     padding-top: 30px !important;
+}
+
+.fa-caret-right {
+    font-size: 100%;
 }
