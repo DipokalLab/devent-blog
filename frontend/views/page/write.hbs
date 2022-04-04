@@ -59,6 +59,16 @@
                     </div>
 
                     <div class="mb-3">
+                        <b>태그</b>
+                        <div id="tag_body">
+
+                        </div>
+                        <input onchange="addTag()" class="form-control form-textarea color-gray-100" id="form_tag"></input>
+                        <p>콤마는 태그의 분리기준 입니다. 되도록 사용하지 마세요.</p>
+
+                    </div>
+
+                    <div class="mb-3">
                         <b>이미지 업로드</b>
                         <input class="form-control" type="file" id="form_file">
                         <div id="image">
@@ -123,6 +133,7 @@
 
 <script>
     loadArticles() 
+    let feed_tags = []
 
     form_file.onchange = function(evt) {
         let file = document.querySelector('#form_file').files[0]
@@ -173,6 +184,29 @@
         }
     };
     
+    
+
+    async function addTag(e) {
+        let tag_data = document.querySelector("#form_tag");
+        let tag_body = document.querySelector("#tag_body");
+
+        let index = feed_tags.indexOf(tag_data.value);
+        if (index <= -1) {
+            feed_tags.push(tag_data.value)
+            tag_body.insertAdjacentHTML('beforeend', `<span class="badge rounded-pill color-blue-100 text-primary mb-3" onclick="removeTag('${tag_data.value}')" id="tags_${tag_data.value}">${tag_data.value}</span>`)
+            tag_data.value = ''
+        }
+    }
+    
+    async function removeTag(tag) {
+        let tag_body = document.querySelector("#tag_body");
+
+        let index = feed_tags.indexOf(tag);
+        if (index > -1) {
+            feed_tags.splice(index, 1);
+            document.getElementById("tags_"+tag).remove()
+        }
+    }
 
     async function createArticle() {
         let title = document.querySelector("#form_article_title").value;
@@ -215,8 +249,8 @@
         let image = document.querySelector("#form_image").value;
         let select_body = document.querySelector("#articles")
         let article = select_body.options[select_body.selectedIndex].value;
+        let tags = feed_tags.join(',')
 
-        let tags = 'aaa'
         if (title == '' || intro == '' || content == '' || image == '' || article == '-1') {
             Swal.fire({
                 icon: 'error',
