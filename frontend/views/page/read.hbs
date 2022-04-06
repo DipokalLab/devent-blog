@@ -5,15 +5,12 @@
     {{> navbar text-style-color="text-invert "}}
 
 
-    <header class="bg-white bg-header-blur py-5" id="header">
-        <div class="container px-5 pt-4 pb-2" >
-            <div class="row gx-5 justify-content-center">
-                <div class="col-lg-6">
-                    <div class="text-center my-5">
+    <header class="bg-header-blur py-5" id="header">
+        <div class="container-fluid pt-4 pb-2" >
+            <div class="text-center my-5">
 
-
-                    </div>
-                </div>
+                <h2 class="display-5 text-center text-light fw-bolder font-weight-lg mb-2" id="feed_title">블로그 작성</h2>
+                <p class="text-center  text-light font-size-sm font-weight-sm"><b id="feed_date"></b> ㆍ author <b id="feed_owner"></b></p>
             </div>
         </div>
     </header>
@@ -27,8 +24,7 @@
             <div class="row gx-5">
 
                 <div class="col-lg-8 mx-auto">
-                    <h2 class="display-5 text-center fw-bolder font-weight-lg mb-2 text-invert" id="feed_title">블로그 작성</h2>
-                    <p class="text-invert text-center font-size-sm font-weight-sm"><b id="feed_date"></b> ㆍ author <b id="feed_owner"></b></p>
+
 
 
                     <button type="button" id="settingButton" class="btn btn-red mt-2" data-bs-toggle="modal" data-bs-target="#deletemodal">
@@ -77,6 +73,30 @@
     </section>
 
 
+    <section class="py-3" id="section_footer">
+        <div class="container px-4 my-5">
+            <div class="row gx-5">
+                <div class="col-lg-8 mx-auto">
+                    <div class="row">
+                        <div class="col d-flex flex-row  text-left">
+                            <button class="btn btn-light"><i class="fas fa-comment-alt"></i> 문의하기</button>
+
+                        </div>
+                        <div class="col d-flex flex-row-reverse text-right">
+                            <button class="btn btn-light" onclick="shareUrl()"><i class="fas fa-share-alt-square"></i> 공유</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="section_toast">
+
+    </div>
+
     {{> footer}}
 
 
@@ -97,6 +117,45 @@
 
     }
 
+    
+    async function shareUrl() {
+        let text = window.location.href
+        let text_body = document.createElement('textarea')
+        text_body.value = text
+        text_body.classList.add('div-hide')
+        document.body.appendChild(text_body);
+        
+
+        text_body.focus();
+        text_body.select();
+
+        document.execCommand('copy');
+        navigator.clipboard.writeText(text).then(async function() {
+            await addToast('복사 완료', '클립보드에 복사했어요.')
+        }, async function(err) {
+            await addToast('복사 실패', '클립보드에 복사하지 못했어요.')
+
+        });
+
+        document.body.removeChild(text_body);
+
+
+    }
+
+    async function addToast(title, msg) {
+        let body = `<dds-popup
+        popup-title="${title}"
+        popup-id="myToastEl"
+        popup-delay="3000"
+        popup-autohide="true">
+        ${msg}
+    </dds-popup>`;
+
+        let div = document.querySelector("#section_toast")
+        div.insertAdjacentHTML('beforeend', body)
+
+    }
+
     async function loadFeed() {
         try {
             let idx = window.location.href.split('/')[4]
@@ -107,11 +166,12 @@
             document.querySelector("#feed_date").innerText = await controlFeedDate(data.data[0].feed_date)
             document.querySelector("#feed_owner").innerText = data.data[0].feed_owner
             document.querySelector("#feed_body").innerHTML = await parserMarkdown(data.data[0].feed_content)
-            document.getElementById("header").style.background = `url(${data.data[0].feed_image})`
+            document.getElementById("header").style.backgroundImage = `url(${data.data[0].feed_image})`
             document.getElementById("header").style.backgroundRepeat = 'no-repeat'
             document.getElementById("header").style.backgroundPosition = 'center center'
             document.getElementById("header").style.backgroundSize = 'cover'
-
+            document.getElementById("header").style.backgroundColor = 'rgba(0, 0, 0, 0.699)'
+            document.getElementById("header").style.backgroundBlendMode = 'darken'
 
             return data
         } catch {
