@@ -128,6 +128,7 @@
 <script>
     loadArticles() 
     let feed_tags = []
+    let imageserver_url = 'https://imageserver.devent.kr'
 
     form_file.onchange = function(evt) {
         let file = document.querySelector('#form_file').files[0]
@@ -136,7 +137,7 @@
         formData.append('image', file)
 
 
-        fetch("http://localhost:9001/api/images", { 
+        fetch(`${imageserver_url}/api/images`, { 
             method: "POST",
             headers: {
                 "x-access-token" : `${token}`
@@ -150,7 +151,7 @@
             if (result.status == 1) {
 
                 document.querySelector("#image").insertAdjacentHTML('beforeend', 
-                `http://localhost:9001/file/${result.filename} <br>`)
+                `${imageserver_url}/file/${result.filename} <br>`)
 
                 setTimeout(() => {
                     swal.fire({
