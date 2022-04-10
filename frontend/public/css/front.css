@@ -116,7 +116,7 @@ h2 {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 32px;
     margin-bottom: 24px;
-    line-height: 12px;
+    line-height: 35px;
 }
 
 .card:hover > .card-img > .card-img-top {
