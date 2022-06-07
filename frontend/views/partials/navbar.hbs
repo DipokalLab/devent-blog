@@ -1,33 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light navbar-blur-base fixed-top" id="nav">
-    <div class="container-fluid px-4 py-2">
-        <a class="navbar-brand font-weight-lg {{text-style-color}}" href="/">Blog</a>
-        <button id="navbar_toggle_button" class="navbar-toggler" type="button" onclick="toggleNavbarIcon()" data-bs-toggle="collapse" data-bs-target="#navbar_toggler" aria-controls="navbar_toggler" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="{{text-style-color}} fas fa-bars icon-navbar-menu"></i>
-            <i class="{{text-style-color}} fas fa-times icon-navbar-close"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbar_toggler">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mr-2">
-            </ul>
-            <div class="justify-content-sm-center" id="login_box">
-                <button id="login_handle_btn" class="btn {{text-style-color}} btn-sm" onclick="location.href = '/auth/login'"><i class="fas fa-sign-in-alt"></i></button>
-            </div>
-        </div>
-    </div>
-</nav>
 
-<script>
-    toggleNavbarIcon()
-    function toggleNavbarIcon() {
-        let is_expanded = document.querySelector("#navbar_toggle_button").getAttribute("aria-expanded");
-        let icon_open = document.querySelector(".icon-navbar-menu");
-        let icon_close = document.querySelector(".icon-navbar-close");
-
-        if (is_expanded == 'true') {
-            icon_open.classList.add("div-hide")
-            icon_close.classList.remove("div-hide")
-        } else {
-            icon_open.classList.remove("div-hide")
-            icon_close.classList.add("div-hide")
-        }
-    }
-</script>
+    
+<dds-navbar nav-title="Blog" nav-fixed="top">
+    <dds-navbar-item item-link="/auth/login"><i class="fas fa-sign-in-alt text-invert"></i></dds-navbar-item>
+</dds-navbar>

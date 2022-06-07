@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko">
     {{> head title="게시글"}}
+    <style>
+        .navbar-brand {
+            color: rgb(255, 255, 255) !important;
+            mix-blend-mode: difference !important;
+        }
+        .navbar-toggler {
+            color: rgb(255, 255, 255) !important;
+            mix-blend-mode: difference !important;
+        }
+    </style>
   <body>
     {{> navbar text-style-color="text-invert "}}
 
 
-    <header class="bg-header-blur py-5" id="header">
+    <section class="bg-header-blur py-5" id="header">
         <div class="container-fluid pt-4 pb-2" >
             <div class="text-center my-5">
 
@@ -13,7 +23,7 @@
                 <p class="text-center  text-light font-size-sm font-weight-sm"><b id="feed_date"></b> ㆍ author <b id="feed_owner"></b></p>
             </div>
         </div>
-    </header>
+    </section>
 
 
     

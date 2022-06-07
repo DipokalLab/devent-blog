@@ -10,16 +10,17 @@ h2 {
     word-break: break-all;
 }
 
-.navbar-blur-base {
+.navbar-blur {
     transition: backdrop-filter 0.3s;
     transition: background-color 0.3s;
-    -webkit-backdrop-filter: saturate(100%) blur(0px);
-    backdrop-filter: saturate(100%) blur(0px);
+    -webkit-backdrop-filter: saturate(120%) blur(16px);
+    backdrop-filter: saturate(120%) blur(16px);
 }
+
+
 
 .bg-header-blur{
     background-color: #ffffffd5;
-
     -webkit-backdrop-filter: saturate(100%) blur(8px);
     backdrop-filter: saturate(100%) blur(8px);
     padding: 160px 25px !important;
@@ -202,11 +203,6 @@ h2 {
     display: none;
 }
 
-header {
-    margin-top: 0px;
-    padding-top: 30px !important;
-    background-color: rgba(0, 0, 0, 0.699);
-}
 
 .fa-caret-right {
     font-size: 100%;

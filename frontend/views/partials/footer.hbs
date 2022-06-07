@@ -26,11 +26,14 @@
 <script src="/js/markdown.js"></script>
 
 <script>
+                document.querySelector("nav").classList.remove('navbar-blur')
+
     document.addEventListener('scroll', function() {
         if (document.documentElement.scrollTop > 20) {
-            document.querySelector("#nav").classList.add('blur-active-base')
+            document.querySelector("nav").classList.add('navbar-blur')
+
         } else {
-            document.querySelector("#nav").classList.remove('blur-active-base')
+            document.querySelector("nav").classList.remove('navbar-blur')
 
         }
     });

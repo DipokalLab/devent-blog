@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
     {{> head title="피드"}}
+    <style>
+        .text-invert {
+            color: #000000 !important;
+            mix-blend-mode:normal !important;
+        }
+    </style>
   <body>
-    {{> navbar text-style-color="text-dark"}}
+    {{> navbar }}
 
 
 
@@ -12,6 +18,8 @@
         <div id="loggedin_panel" class="div-hide">
             <div class="d-grid gap-2">
                 <button class="btn btn-blue" onclick="location.href='/write'">피드 작성</button>
+                <button class="btn btn-red" onclick="logout()">로그아웃</button>
+
             </div>
         </div>
     </dds-header>
