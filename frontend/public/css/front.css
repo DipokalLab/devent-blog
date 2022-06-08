@@ -116,7 +116,7 @@ h2 {
 .card-title{
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 32px;
-    margin-bottom: 24px;
+    margin-bottom: 14px;
     line-height: 35px;
 }
 
@@ -207,3 +207,10 @@ h2 {
 .fa-caret-right {
     font-size: 100%;
 }
+
+@media (max-width: 991.98px) { 
+    .card-title {
+        font-size: 22px;
+        margin-bottom: 4px !important;
+    }
+ }

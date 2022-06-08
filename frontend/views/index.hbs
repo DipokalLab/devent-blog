@@ -93,9 +93,7 @@
 
         async function patchFeed() {
             let feeds_info = await getFeedsInformation()
-            console.log(feeds_info)
             now_feed_idx = feeds_info.data[0].feed_last_idx
-            
         }
 
         
@@ -127,7 +125,10 @@
             let body = document.querySelector("#tags_"+String(idx))
             
             tags.forEach(function (item) {
-                body.insertAdjacentHTML("beforeend", `<span class="badge rounded-pill color-blue-100 text-primary mb-3 mr-2">${item}</span>`)
+                span = document.createElement('span')
+                span.classList.add('badge', 'rounded-pill', 'text-primary', 'color-blue-100', 'mb-3', 'mr-2')
+                span.innerHTML = item
+                body.insertAdjacentElement("beforeend", span)
             })
 
         }
@@ -137,19 +138,21 @@
         async function loadMoreFeeds() {
             now_feed_idx = now_feed_idx-feed_increase-1
             await loadFeeds() 
-            
         }
 
 
         async function loadArticles() {
             let data = await getArticles(0)
-            console.log(data)
             let body = document.querySelector("#articles");
 
             data.data.forEach(function(item) {
-                body.insertAdjacentHTML('beforeend', `
-<button class="btn btn-light mt-1 mr-1" onclick="location.href='/articles/${item.idx}'" type="button">${item.title}</button>
-`)
+                button = document.createElement('button')
+                button.classList.add('btn', 'btn-light', 'mt-1', 'me-1')
+                button.setAttribute('onclick', `location.href='/articles/${item.idx}'`)
+                button.setAttribute('type', `button`)
+                button.innerHTML = item.title
+
+                body.insertAdjacentElement('beforeend', button)
             })
             
         }

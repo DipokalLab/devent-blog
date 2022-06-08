@@ -39,7 +39,7 @@ npm run start
 
 ## 배포
 
-#### STEP.1 deployenv 설정
+#### STEP.1 devent-deploy ENV 설정
 
 ```
 VIRTUAL_HOST=blog.devent.kr,LETSENCRYPT_HOST=blog.devent.kr,LETSENCRYPT_EMAIL=hhj@devent.kr,DB_USER=root,DB_PASS=testtesttest,DB_HOST=172.17.0.1,DB_PORT=3307
